@@ -1,0 +1,47 @@
+Secuencia de paso para generar una libreria en angular con tailwind
+1.- Crear un espacio de trabajo (No de tipo aplicacion)
+	ng new my-workspace --create-application=false
+2.- Acceder al proyecto creado
+	cd my-workspace
+3.- Generar la libreria
+	ng generate library my-library
+    --Dentro de project/my-library de generan dos carpetas: button y input...se pueden generar muchos mas. Estas multiples entradas (endpoins) permiten independencia y aislamiento de necesidades css en cada componente. Creditos a : https://www.youtube.com/watch?v=4WI7FZA0Pyk		
+4.- Instalar tailwind
+	npm install tailwindcss postcss autoprefixer
+5.- Iniciar tailwind
+	npx tailwindcss init
+    --En el directorio :  project/my-library crear el archivo tailwind.css y agregar
+	@tailwind base;
+	@tailwind components;
+	@tailwind utilities;
+    -dentro del archivo tailwind.config.js  agregar
+    module.exports = {
+  content: [
+    './projects/my-library/**/*.html',
+    './projects/my-library/**/*.ts',
+    './projects/my-library/button/**/*.ts',
+    './projects/my-library/input/**/*.ts'
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};	
+6.- Instalar PostCSS, Tailwind CSS y Autoprefixer 
+	npm install tailwindcss postcss autoprefixer
+7.- Crear el archivo postcss.config.js
+	touch postcss.config.js
+    -Dentro del archivo creado, Agregar
+    module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+	 },
+	};		
+8.-Modificar Package.json
+   --Dentro del scripts, agregar
+   "build-css": "npx tailwindcss -i ./projects/my-library/tailwind.css -o ./dist/my-library/lib/styles.css --watch --verbose",	
+9.- ng build
+10.- npm run build-css
+//OBSERVACION
+Posterior a ejecutar los dos comandos anteriores, en la raiz del proyecto "my-workspace" se generara un carpeta dist, dentro de ello esta "my-library" y mucho mas adentro (dist-->my-library-->lib) esta "styles.css". Tener en cuenta la carpeta "my-library" y el archivo style.css que seran usados en la aplicacion final.

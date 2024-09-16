@@ -1,0 +1,19 @@
+1.- Crear proyecto angular
+	ng new my-angular-app
+2.- Navegar al directorio
+	cd my-angular-app
+3.- Importar module al componente
+	-- en : MY-ANGULAR-APP/SRC/APP/app.component.ts agregar
+	import { CommonModule } from '@angular/common'	
+	imports: [CommonModule,.....]
+4.- En el directorio principal (MY-ANGULAR-APP)
+	Copiar la carpeta "my-library", que se encuentra dentro de la carpeta DIST (creada en el proyecto de la libreria), a la raiz del proyecto app (MY-ANGULAR-APP).
+	Copiar el el estido (dist-->my-library-->lib) "styles.css" a : MY-ANGULAR-APP/SRC.
+5.- En MY-ANGULAR-APP/SRC/app/app.component.htl : llamar a las etiquetas (componentes de la libreria):
+<div>
+  <lib-my-library-button></lib-my-library-button>
+  <lib-my-library-input></lib-my-library-input>  
+  </div>
+6.- npm install
+7.- ng serve  
+		
